@@ -14,32 +14,50 @@ interface HomeProps {
 
 export default function Home({ categories }: HomeProps) {
   return (
-    <main className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10 text-black">
-          Explore Categories
-        </h1>
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-16 px-4">
+      <div className="max-w-7xl mx-auto text-center">
+        {/* Hero Section */}
+        <section className="mb-16">
+          <h1 className="text-5xl font-extrabold mb-4 text-gray-900">
+            Welcome to Fashion Store
+          </h1>
+          <p className="text-lg text-gray-600 max-w-xl mx-auto">
+            Explore premium clothing for Men & Women — find your style.
+          </p>
+        </section>
 
+        {/* Category Cards */}
         {categories.map((category) => (
-          <div key={category.id} className="mb-12">
-            <h2 className="text-2xl font-bold text-black mb-6 px-2">
+          <div key={category.id} className="mb-16">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">
               {category.name}
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {category.children?.map((subcat) => (
-                <Link
-                  key={subcat.id}
-                  href={`/category/${encodeURIComponent(
-                    category.name.toLowerCase()
-                  )}/${encodeURIComponent(subcat.name.toLowerCase())}`}
-                  className="block bg-white p-6 rounded-xl shadow hover:shadow-lg border border-gray-200 transition text-center"
-                >
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {subcat.name}
-                  </h3>
-                </Link>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center place-items-center">
+              {category.children?.map((subcat) => {
+                const imagePath = `/images/categories/${subcat.name.toLowerCase()}.jpg`;
+
+                return (
+                  <Link
+                    key={subcat.id}
+                    href={`/category/${encodeURIComponent(
+                      category.name.toLowerCase()
+                    )}/${encodeURIComponent(subcat.name.toLowerCase())}`}
+                    className="group block bg-white p-5 rounded-xl shadow hover:shadow-xl transition border border-gray-200 w-full max-w-[280px]"
+                  >
+                    <div className="overflow-hidden rounded-md mb-4">
+                      <img
+                        src={imagePath}
+                        alt={subcat.name}
+                        className="h-40 w-full object-cover group-hover:scale-105 transition-transform"
+                      />
+                    </div>
+                    <h3 className="text-lg font-semibold text-center text-gray-900 group-hover:text-yellow-600">
+                      {subcat.name}
+                    </h3>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         ))}
@@ -64,4 +82,3 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     },
   };
 };
-

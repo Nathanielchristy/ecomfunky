@@ -25,19 +25,29 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 export default function ProductPage({ product }: ProductPageProps) {
-    const { addToCart } = useCart();
+  const { addToCart } = useCart();
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
-        <img src={product.image} alt={product.name} className="w-full h-64 object-cover rounded mb-4" />
-        <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-        <p className="text-gray-700 mb-4">{product.description}</p>
-        <p className="text-xl font-bold mb-4">${product.price}</p>
+    <div className="min-h-screen bg-white">
+      {/* Full Image Banner */}
+      <div className="w-full h-[60vh] overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
+
+      {/* Product Details */}
+      <div className="max-w-4xl mx-auto px-6 py-10 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
+        <p className="text-gray-600 text-base mb-4">{product.description}</p>
+        <p className="text-2xl font-bold text-gray-800 mb-6">${product.price.toFixed(2)}</p>
         <button
-        onClick={() => addToCart(product)}
-        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+          onClick={() => addToCart(product)}
+          className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition font-medium"
         >
-        Add to Cart
+          Add to Cart
         </button>
       </div>
     </div>
