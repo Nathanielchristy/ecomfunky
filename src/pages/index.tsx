@@ -38,7 +38,6 @@ export default function Home({ categories }: HomeProps) {
     </section>
 
 
-
     <section id="categories" className="py-24 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -87,8 +86,32 @@ export default function Home({ categories }: HomeProps) {
       </div>
     </section>
 
+<section id="about" className="bg-gray-50 py-24 px-4">
+  <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-16">
+    {/* Text */}
+    <div className="w-full lg:w-1/2">
+      <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+      <p className="text-lg text-gray-700 leading-relaxed mb-4">
+        FashionStore was born out of a desire to bring timeless elegance and modern trends together.
+        We believe fashion is more than clothing — it&apos;s confidence, expression, and identity.
+      </p>
+      <p className="text-lg text-gray-700 leading-relaxed">
+        From curated collections to everyday essentials, our mission is to empower individuals
+        with premium-quality fashion that&apos;s sustainable, stylish, and made to last.
+        Join us on a journey where every piece tells your story.
+      </p>
+    </div>
 
-
+    {/* Image */}
+    <div className="w-full lg:w-1/2">
+      <img
+        src="/images/about-banner.jpg"
+        alt="Our Story"
+        className="w-full h-auto rounded-lg shadow-lg object-cover"
+      />
+    </div>
+  </div>
+</section>
 
 
     </main>

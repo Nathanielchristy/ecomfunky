@@ -9,7 +9,7 @@ export default function NavLinks() {
       <Link href="/#categories" className="text-gray-700 hover:text-gray-900 transition">
         Shop
       </Link>
-      <Link href="/about" className="text-gray-700 hover:text-gray-900 transition">
+      <Link href="/#about" className="text-gray-700 hover:text-gray-900 transition">
         About
       </Link>
       <Link href="/#contact" className="text-gray-700 hover:text-gray-900 transition">
