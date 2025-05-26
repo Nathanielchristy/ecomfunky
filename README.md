@@ -106,7 +106,7 @@ http://localhost:3000
 
 ## 📦 Deployment
 
-## Deployed on Vercel link - 
+## Deployed on Vercel link - https://ecomfunky.vercel.app/
 
 ---
 
