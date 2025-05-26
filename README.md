@@ -106,7 +106,7 @@ http://localhost:3000
 
 ## 📦 Deployment
 
-You can deploy this on [Vercel](https://vercel.com) by connecting your GitHub repo and selecting the default settings.
+## Deployed on Vercel link - 
 
 ---
 

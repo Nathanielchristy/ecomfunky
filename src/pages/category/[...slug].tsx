@@ -95,17 +95,19 @@ function findCategoryBySlug(slugs: string[], current: Category[] = categories): 
 }
 
 // Server-side data fetching
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
   const slugArray = params?.slug as string[];
 
   const category = findCategoryBySlug(slugArray);
-
   if (!category) return { notFound: true };
 
   const categorySlugPath = '/' + slugArray.map(encodeURIComponent).join('/');
 
+  const protocol = req.headers.host?.startsWith('localhost') ? 'http' : 'https';
+  const baseUrl = `${protocol}://${req.headers.host}`;
+
   if (!category.children || category.children.length === 0) {
-    const res = await axios.get('/api/products');
+    const res = await axios.get(`${baseUrl}/api/products?categoryId=${category.id}`);
     return {
       props: {
         category,
