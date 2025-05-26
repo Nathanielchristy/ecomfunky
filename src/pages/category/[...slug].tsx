@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const categorySlugPath = '/' + slugArray.map(encodeURIComponent).join('/');
 
   if (!category.children || category.children.length === 0) {
-    const res = await axios.get(`http://localhost:3000/api/products?categoryId=${category.id}`);
+    const res = await axios.get('/api/products');
     return {
       props: {
         category,
