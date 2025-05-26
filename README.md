@@ -1,40 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🛍️ Next.js E-Commerce Frontend (Fashion Store)
 
-## Getting Started
+A minimal, modern e-commerce frontend built using **Next.js**, **TypeScript**, **Tailwind CSS**, and **Zustand**.  
+This app supports a **3-level nested category structure**, dynamic product routing, internal mock APIs, and a global cart system.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- ✅ **Next.js with TypeScript**
+- ✅ **3-Level Category Navigation** (e.g. Clothing > Men > Shirts)
+- ✅ Dynamic Routes using App Router
+- ✅ Server-side rendering with `getServerSideProps`
+- ✅ Internal API routes for categories and products
+- ✅ Global state management with Zustand (for cart)
+- ✅ Styled with Tailwind CSS
+- ✅ Responsive and modern UI
+- ✅ Add to cart, view cart, and dynamic product detail page
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+├── pages/
+│   ├── index.tsx                  # Homepage with top-level categories
+│   ├── cart.tsx                   # Cart page
+│   ├── product/[id].tsx           # Product detail page
+│   └── category/[...slug].tsx     # Dynamic nested category route
+├── data/
+│   ├── categories.ts              # Mock category data (3 levels)
+│   └── products.ts                # Mock product data
+├── store/
+│   └── cartStore.ts               # Zustand cart logic
+├── components/
+│   └── Navbar.tsx                 # Shared navigation
+```
+
+---
+
+## 🧪 Mock Data Structure
+
+- `categories.ts` uses 3 nested levels:
+  - Clothing
+    - Men → Shirts, Pants
+    - Women → Dresses, Skirts
+
+- `products.ts` contains real product data mapped to 3rd-level category IDs.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Visit the App
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🧰 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** (Pages Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Zustand** (global cart state)
+- **Axios** (for internal API calls)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🖼️ Image Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Place your product images in `/public/images/`
+- Reference them in `products.ts` like:
+  ```ts
+  image: '/images/my-shirt.jpg'
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📝 Assignment Objectives Covered
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Build homepage with top-level categories
+- ✅ Handle 3-level nested dynamic routing via `[...slug].tsx`
+- ✅ Display products per category
+- ✅ Add to cart and cart management
+- ✅ Product detail page routing
+- ✅ Use TypeScript interfaces for structure
+- ✅ Internal mock APIs (`/api/categories`, `/api/products`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## 📦 Deployment
+
+You can deploy this on [Vercel](https://vercel.com) by connecting your GitHub repo and selecting the default settings.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
