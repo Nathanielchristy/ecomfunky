@@ -103,11 +103,18 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
 
   const categorySlugPath = '/' + slugArray.map(encodeURIComponent).join('/');
 
+  // Build base URL dynamically
   const protocol = req.headers.host?.startsWith('localhost') ? 'http' : 'https';
   const baseUrl = `${protocol}://${req.headers.host}`;
 
+  // If this is a leaf category (no children), fetch products
   if (!category.children || category.children.length === 0) {
-    const res = await axios.get(`${baseUrl}/api/products?categoryId=${category.id}`);
+    const res = await axios.get(`${baseUrl}/api/products?categoryId=${category.id}`, {
+      headers: {
+        'x-internal-token': process.env.INTERNAL_API_TOKEN || 'dev-token'
+      }
+    });
+
     return {
       props: {
         category,
@@ -117,6 +124,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
     };
   }
 
+  // Return subcategory view
   return {
     props: {
       category,

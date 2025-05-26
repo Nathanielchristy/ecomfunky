@@ -2,15 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { products } from '@/data/products';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { categoryId } = req.query;
+  const token = req.headers['x-internal-token'];
 
-  if (!categoryId) {
-    return res.status(400).json({ message: 'Missing categoryId' });
+  if (token !== process.env.INTERNAL_API_TOKEN && token !== 'dev-token') {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const filtered = products.filter(
-    (product) => product.categoryId === Number(categoryId)
-  );
-
-  res.status(200).json(filtered);
+  const categoryId = parseInt(req.query.categoryId as string);
+  const filtered = products.filter(p => p.categoryId === categoryId);
+  return res.status(200).json(filtered);
 }

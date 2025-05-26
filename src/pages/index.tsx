@@ -48,15 +48,20 @@ export default function Home({ categories }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const protocol = context.req.headers.host?.startsWith('localhost') ? 'http' : 'https';
-  const host = context.req.headers.host;
-  const baseUrl = `${protocol}://${host}`;
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const protocol = req.headers.host?.startsWith('localhost') ? 'http' : 'https';
+  const baseUrl = `${protocol}://${req.headers.host}`;
 
-  const res = await axios.get(`${baseUrl}/api/categories`);
+  const res = await axios.get(`${baseUrl}/api/categories`, {
+    headers: {
+      'x-internal-token': process.env.INTERNAL_API_TOKEN || 'dev-token',
+    },
+  });
+
   return {
     props: {
       categories: res.data,
     },
   };
 };
+
