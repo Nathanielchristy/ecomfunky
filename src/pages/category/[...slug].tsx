@@ -15,24 +15,31 @@ export default function CategoryPage({ category, products, categorySlugPath }: P
   const { addToCart } = useCart();
 
   return (
-    <main className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10 text-black">
-          {category.name}
-        </h1>
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-16 px-4">
+      <div className="max-w-7xl mx-auto text-center">
+        <h1 className="text-4xl font-bold mb-10 text-gray-900">{category.name}</h1>
 
-        {/* If category has children, show subcategory cards */}
+        {/* Subcategory Cards */}
         {category.children?.length ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center place-items-center">
             {category.children.map((child) => {
               const childPath = `${categorySlugPath}/${child.name.toLowerCase()}`;
+              const imagePath = `/images/categories/${child.name.toLowerCase()}.jpg`;
+
               return (
                 <Link
                   key={child.id}
                   href={`/category${childPath}`}
-                  className="block bg-white p-6 rounded-xl shadow hover:shadow-lg border border-gray-200 transition text-center"
+                  className="group block bg-white p-5 rounded-xl shadow hover:shadow-xl transition border border-gray-200 w-full max-w-[280px] text-center"
                 >
-                  <h2 className="text-lg font-semibold text-gray-800">
+                  <div className="overflow-hidden rounded-md mb-4">
+                    <img
+                      src={imagePath}
+                      alt={child.name}
+                      className="h-40 w-full object-cover group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <h2 className="text-lg font-semibold text-gray-900 group-hover:text-yellow-600">
                     {child.name}
                   </h2>
                 </Link>
@@ -40,26 +47,25 @@ export default function CategoryPage({ category, products, categorySlugPath }: P
             })}
           </div>
         ) : (
-          // Otherwise, show product cards
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          // Product Cards
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center place-items-center">
             {products?.map((product) => (
-              <li
+              <div
                 key={product.id}
-                className="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all border border-gray-200"
+                className="bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition border border-gray-200 w-full max-w-[280px] text-center"
               >
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-52 object-cover rounded-md mb-4"
+                  className="w-full h-40 object-cover rounded mb-4"
                 />
-                <h2 className="text-xl font-semibold text-gray-900 mb-1">
+                <h2 className="text-lg font-semibold text-gray-900 mb-1 text-center">
                   {product.name}
                 </h2>
-                <p className="text-gray-600 text-sm mb-2">{product.description}</p>
-                <p className="text-lg font-bold text-gray-800 mb-4">
+                <p className="text-gray-600 text-sm mb-2 text-center">{product.description}</p>
+                <p className="text-center text-lg font-bold text-gray-800 mb-4">
                   ${product.price.toFixed(2)}
                 </p>
-
                 <div className="flex gap-2">
                   <button
                     onClick={() => addToCart(product)}
@@ -74,9 +80,9 @@ export default function CategoryPage({ category, products, categorySlugPath }: P
                     View Details
                   </Link>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </main>
@@ -102,17 +108,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
   if (!category) return { notFound: true };
 
   const categorySlugPath = '/' + slugArray.map(encodeURIComponent).join('/');
-
-  // Build base URL dynamically
   const protocol = req.headers.host?.startsWith('localhost') ? 'http' : 'https';
   const baseUrl = `${protocol}://${req.headers.host}`;
 
-  // If this is a leaf category (no children), fetch products
   if (!category.children || category.children.length === 0) {
     const res = await axios.get(`${baseUrl}/api/products?categoryId=${category.id}`, {
       headers: {
-        'x-internal-token': process.env.INTERNAL_API_TOKEN || 'dev-token'
-      }
+        'x-internal-token': process.env.INTERNAL_API_TOKEN || 'dev-token',
+      },
     });
 
     return {
@@ -124,7 +127,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
     };
   }
 
-  // Return subcategory view
   return {
     props: {
       category,

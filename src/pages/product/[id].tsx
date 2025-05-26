@@ -30,13 +30,14 @@ export default function ProductPage({ product }: ProductPageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Full Image Banner */}
-      <div className="w-full h-[60vh] overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover object-center"
-        />
-      </div>
+    <div className="w-full flex justify-center bg-gray-100 py-10">
+    <img
+        src={product.image}
+        alt={product.name}
+        className="max-h-[600px] w-auto rounded-lg shadow-md"
+    />
+    </div>
+
 
       {/* Product Details */}
       <div className="max-w-4xl mx-auto px-6 py-10 text-center">

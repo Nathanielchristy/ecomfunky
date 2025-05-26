@@ -43,7 +43,7 @@ export default function Home({ categories }: HomeProps) {
                     href={`/category/${encodeURIComponent(
                       category.name.toLowerCase()
                     )}/${encodeURIComponent(subcat.name.toLowerCase())}`}
-                    className="group block bg-white p-5 rounded-xl shadow hover:shadow-xl transition border border-gray-200 w-full max-w-[280px]"
+                    className="group block bg-white p-5 rounded-xl shadow hover:shadow-xl transition border border-gray-200 w-full max-w-[280px] text-center"
                   >
                     <div className="overflow-hidden rounded-md mb-4">
                       <img
