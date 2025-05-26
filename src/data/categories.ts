@@ -22,7 +22,8 @@ export const categories: Category[] = [
         name: 'Women',
         children: [
           { id: 6, name: 'Dresses' },
-          { id: 7, name: 'Skirts' }
+          { id: 7, name: 'Skirts' },
+          { id: 8, name: 'Tops' }
         ]
       }
     ]

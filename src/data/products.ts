@@ -55,5 +55,14 @@ export const products: Product[] = [
     price: 72.0,
     image: '/images/floral-dress.jpg',
     description: 'Graceful A-line dress featuring a vibrant floral pattern and soft-touch fabric.'
-  }
+  },
+  {
+    id:107,
+    name:"Floral Top",
+    categoryId: 8,
+    price:50,
+    image: '/images/floral-top.jpg',
+    description: "A flattering top with a flattering silhouette and subtle floral details."
+  },
+
 ];
